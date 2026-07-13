@@ -349,29 +349,120 @@
                 </div>
             </div>
             
-            <div class="mt-12 text-center bg-white p-8 rounded-3xl border border-dashed border-gray-300 max-w-2xl mx-auto">
-                <p class="text-sm uppercase tracking-widest text-gray-500">Package Includes</p>
-                <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mt-6 text-sm font-medium">
-                    <div class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Work Permit</div>
-                    <div class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Visa Assistance</div>
-                    <div class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Air Ticket</div>
-                </div>
+            <!-- PACKAGE INCLUDED / NOT INCLUDED -->
+<div class="mt-12 grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+
+    <!-- Package Includes -->
+    <div class="group relative overflow-hidden rounded-3xl shadow-xl border border-green-200 bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+
+        <div class="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-green-400 via-emerald-500 to-cyan-500"></div>
+
+        <div class="bg-gradient-to-r from-green-500 to-cyan-500 text-white p-8 text-center">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-white/20 flex items-center justify-center text-3xl transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
+                <i class="fas fa-shield-check"></i>
             </div>
 
-<div class="mt-12 text-center bg-white p-8 rounded-3xl border border-dashed border-gray-300 max-w-2xl mx-auto">
-                <p class="text-sm uppercase tracking-widest text-gray-500">Package Not Included</p>
-                <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mt-6 text-sm font-medium">
-                    <div class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> India travel expenses</div>
-                    <div class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Any external government or third-party charges (if applicable)</div>
-                </div>
-            </div>
+            <h3 class="text-2xl font-bold heading-font">
+                Package Includes
+            </h3>
 
-
-
-
-
-            
+            <p class="text-green-50 mt-2 text-sm">
+                Services covered within the package
+            </p>
         </div>
+
+        <div class="p-8 space-y-5">
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-green-50 transition-all duration-300 hover:bg-green-100 hover:translate-x-1">
+                <div class="w-11 h-11 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-file-circle-check"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-gray-800">Work Permit</div>
+                    <div class="text-sm text-gray-500">
+                        Work permit processing support
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-green-50 transition-all duration-300 hover:bg-green-100 hover:translate-x-1">
+                <div class="w-11 h-11 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-passport"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-gray-800">Visa Assistance</div>
+                    <div class="text-sm text-gray-500">
+                        Guidance throughout the visa application process
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-green-50 transition-all duration-300 hover:bg-green-100 hover:translate-x-1">
+                <div class="w-11 h-11 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-plane-departure"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-gray-800">Air Ticket</div>
+                    <div class="text-sm text-gray-500">
+                        Air ticket included in the package
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Package Not Included -->
+    <div class="group relative overflow-hidden rounded-3xl shadow-xl border border-red-200 bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+
+        <div class="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-orange-400 via-red-500 to-pink-500"></div>
+
+        <div class="bg-gradient-to-r from-orange-500 to-pink-600 text-white p-8 text-center">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-white/20 flex items-center justify-center text-3xl transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-110">
+                <i class="fas fa-circle-xmark"></i>
+            </div>
+
+            <h3 class="text-2xl font-bold heading-font">
+                Package Not Included
+            </h3>
+
+            <p class="text-red-50 mt-2 text-sm">
+                Costs that applicants must pay separately
+            </p>
+        </div>
+
+        <div class="p-8 space-y-5">
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-red-50 transition-all duration-300 hover:bg-red-100 hover:translate-x-1">
+                <div class="w-11 h-11 rounded-full bg-red-500 text-white flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-route"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-gray-800">
+                        India Travel Expenses
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        Travel and related expenses in India are not included
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-red-50 transition-all duration-300 hover:bg-red-100 hover:translate-x-1">
+                <div class="w-11 h-11 rounded-full bg-red-500 text-white flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-building-columns"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-gray-800">
+                        External Government or Third-Party Charges
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        Additional charges may apply where required
+                    </div>
+                </div>
+            </div>
+            
+      </div>
+    </div>
     </section>
 
     <!-- REQUIRED DOCUMENTS -->
