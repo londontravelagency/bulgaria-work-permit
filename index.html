@@ -378,7 +378,7 @@
         <div class="relative overflow-hidden rounded-3xl shadow-2xl border border-gray-200">
 
             <div id="documents-slider"
-                 class="flex transition-transform duration-700 ease-in-out">
+                 class="flex transition-transform duration-700 ease-in-out will-change-transform">
 
                 <!-- Slide 1 -->
                 <div class="relative w-full flex-shrink-0">
@@ -688,7 +688,7 @@
         <div class="relative overflow-hidden rounded-3xl shadow-2xl border border-white/20 mb-12">
 
             <div id="journey-slider"
-                 class="flex transition-transform duration-700 ease-in-out">
+                 class="flex transition-transform duration-700 ease-in-out will-change-transform">
 
                 <!-- Slide 1 -->
                 <div class="relative w-full flex-shrink-0">
@@ -803,6 +803,7 @@
             aria-label="Show image 4">
     </button>
         </div>
+             </div>
             <!-- End Slider Dots -->
             
         <!-- Contact Card -->
@@ -884,19 +885,12 @@
     <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    console.log(
-        "%cBulgaria Work Visa Website Ready!",
-        "color:#25D366;font-size:14px;font-weight:bold"
-    );
-
     // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener("click", function (event) {
             const href = this.getAttribute("href");
 
-            if (!href || href === "#") {
-                return;
-            }
+            if (!href || href === "#") return;
 
             const target = document.querySelector(href);
 
@@ -910,7 +904,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Reusable carousel function
     function initialiseCarousel(config) {
         const slider = document.getElementById(config.sliderId);
         const previousButton = document.getElementById(config.previousButtonId);
@@ -918,84 +911,72 @@ document.addEventListener("DOMContentLoaded", function () {
         const dots = document.querySelectorAll(config.dotSelector);
 
         if (!slider || !previousButton || !nextButton || dots.length === 0) {
+            console.warn("Carousel elements missing:", config.sliderId);
             return;
         }
 
         let currentSlide = 0;
-        let autoplayTimer;
+        let autoplayTimer = null;
 
         function showSlide(index) {
             currentSlide = (index + dots.length) % dots.length;
+
             slider.style.transform =
-                `translateX(-${currentSlide * 100}%)`;
+                `translate3d(-${currentSlide * 100}%, 0, 0)`;
 
             dots.forEach((dot, dotIndex) => {
-                const isActive = dotIndex === currentSlide;
+                const active = dotIndex === currentSlide;
 
-                dot.classList.toggle("w-8", isActive);
-                dot.classList.toggle("bg-white", isActive);
-                dot.classList.toggle("w-2", !isActive);
-                dot.classList.toggle("bg-white/50", !isActive);
+                dot.classList.toggle("w-8", active);
+                dot.classList.toggle("bg-white", active);
+                dot.classList.toggle("w-2", !active);
+                dot.classList.toggle("bg-white/50", !active);
             });
         }
 
         function startAutoplay() {
             clearInterval(autoplayTimer);
 
-            autoplayTimer = setInterval(() => {
+            autoplayTimer = setInterval(function () {
                 showSlide(currentSlide + 1);
-            }, config.interval || 4000);
-        }
-
-        function restartAutoplay() {
-            startAutoplay();
+            }, config.interval || 3000);
         }
 
         previousButton.addEventListener("click", function () {
             showSlide(currentSlide - 1);
-            restartAutoplay();
+            startAutoplay();
         });
 
         nextButton.addEventListener("click", function () {
             showSlide(currentSlide + 1);
-            restartAutoplay();
+            startAutoplay();
         });
 
         dots.forEach((dot, index) => {
             dot.addEventListener("click", function () {
                 showSlide(index);
-                restartAutoplay();
+                startAutoplay();
             });
-        });
-
-        slider.addEventListener("mouseenter", function () {
-            clearInterval(autoplayTimer);
-        });
-
-        slider.addEventListener("mouseleave", function () {
-            startAutoplay();
         });
 
         showSlide(0);
         startAutoplay();
     }
 
-    // Required Documents carousel
     initialiseCarousel({
         sliderId: "documents-slider",
         previousButtonId: "documents-prev",
         nextButtonId: "documents-next",
         dotSelector: ".documents-dot",
-        interval: 4000
+        interval: 3000
     });
 
-    // European Journey carousel
     initialiseCarousel({
         sliderId: "journey-slider",
         previousButtonId: "journey-prev",
         nextButtonId: "journey-next",
         dotSelector: ".journey-dot",
-        interval: 4000
+        interval: 3000
     });
 
 });
