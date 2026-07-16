@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | London Travel Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .heading-font { font-family: 'Poppins', sans-serif; }
+        .flag-bg { background: linear-gradient(135deg, #3B8E3F 0%, #D6262B 100%); }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 65px;
+            height: 65px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5); }
+        .whatsapp-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- NAVBAR -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold flag-bg">🇧🇬</div>
+                <div>
+                    <span class="text-2xl font-bold heading-font text-blue-700">Bulgaria</span>
+                    <span class="text-xl text-gray-600 block -mt-1">Work Visa</span>
+                </div>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-6 text-lg font-bold">
+                <a href="index.html" class="hover:text-blue-600 transition-colors">Home</a>
+                <a href="about.html" class="hover:text-blue-600 transition-colors">About</a>
+                <a href="services.html" class="hover:text-blue-600 transition-colors">Services</a>
+                <a href="contact.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Contact</a>
+            </div>
+            
+            <a href="#contact" 
+               class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl font-semibold flex items-center gap-2 transition-all">
+                <i class="fas fa-phone"></i>
+                Contact Us
+            </a>
+        </div>
+    </nav>
+
+    <!-- CONTACT HERO -->
+    <section class="bg-gradient-to-br from-blue-700 to-indigo-800 text-white py-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold heading-font mb-4">Contact Us</h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                Get in touch with our team for expert visa and immigration guidance
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACT INFO -->
+    <section class="py-20 bg-white" id="contact">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Details -->
+                <div>
+                    <h2 class="text-3xl font-bold heading-font mb-6">Get in Touch</h2>
+                    <p class="text-gray-600 mb-8">We're here to help you with your European journey. Reach out to us through any of the following channels.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-location-dot text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">UK Office</h4>
+                                <p class="text-gray-600">102-105 Whitechapel High Street, Office No. 201, E1 7RA, London, UK</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-location-dot text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Bangladesh Office</h4>
+                                <p class="text-gray-600">Lift 6, Office No. 105, Mukto Bangla Shopping Complex, Mirpur 1, Dhaka 1216</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fab fa-whatsapp text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">WhatsApp</h4>
+                                <p class="text-gray-600">+1 (347) 706-7980</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">UK Mobile</h4>
+                                <p class="text-gray-600">+44 7448 270044</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clock text-purple-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Service Hours</h4>
+                                <p class="text-gray-600">24-Hour Service</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-gray-50 rounded-3xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold heading-font mb-6">Send Us a Message</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-sm font-semibold mb-2">Full Name</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="Your full name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-semibold mb-2">Email Address</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="your@email.com">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-semibold mb-2">Phone Number</label>
+                            <input type="tel" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="+44 7448 270044">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-semibold mb-2">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="Tell us about your visa requirements..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-semibold transition-all">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAP PLACEHOLDER -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-gray-300 rounded-3xl h-80 flex items-center justify-center">
+                <p class="text-gray-500 text-lg">📍 Location Map - Coming Soon</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center items-center gap-3 mb-6">
+                <div class="flag-bg w-8 h-8 rounded-xl flex items-center justify-center text-white">🇧🇬</div>
+                <span class="text-white font-semibold">London Travel Agency &amp; Consultancy</span>
+            </div>
+            <div class="text-sm text-gray-500 mb-4 space-y-1">
+                <p><span class="text-gray-400 font-medium">UK Office:</span> 102-105 Whitechapel High Street, Office No. 201, E1 7RA, London, UK</p>
+                <p><span class="text-gray-400 font-medium">Bangladesh Office:</span> Lift 6, Office No. 105, Mukto Bangla Shopping Complex, Mirpur 1, Dhaka 1216</p>
+                <p class="mt-2">WhatsApp: +1 (347) 706-7980 | UK Mobile: +44 7448 270044</p>
+            </div>
+            <p class="text-sm">Visa approval is at the sole discretion of Bulgarian authorities.<br>All documents must be genuine.</p>
+            <div class="mt-8 text-xs">© 2026 London Travel Agency. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/13477067980" target="_blank" 
+       class="whatsapp-float whatsapp-pulse" 
+       title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
