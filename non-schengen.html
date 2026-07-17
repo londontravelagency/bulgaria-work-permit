@@ -18,9 +18,6 @@
         .hero-bg {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('europe-non-schengen.jpg') center/cover no-repeat;
         }
-        .flag-bg {
-            background: linear-gradient(135deg, #3B8E3F 0%, #D6262B 100%);
-        }
         .card-hover {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -80,26 +77,39 @@
             box-shadow: 0 12px 40px rgba(0,0,0,0.12);
             border-color: #04aa6d;
         }
+
+        /* Mobile Menu Transition */
+        .mobile-menu-open {
+            max-height: 500px;
+            opacity: 1;
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        .mobile-menu-closed {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- ====== NAVBAR - FULL NAVIGATION WITH ALL LINKS ====== -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold flag-bg">🇧🇬</div>
-                <div>
-                    <span class="text-2xl font-bold heading-font text-blue-700">Bulgaria</span>
-                    <span class="text-xl text-gray-600 block -mt-1">Work Visa</span>
-                </div>
+    <!-- ====== NAVBAR - WITH COMPANY LOGO ====== -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-1.5 sm:py-2 flex justify-between items-center">
+            <!-- Logo + Company Name -->
+            <a href="index.html" class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <img src="https://raw.githubusercontent.com/londontravelagency/bulgaria-work-permit/main/Company%20logo.jpeg" 
+                     alt="London Travel Agency Logo" 
+                     class="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain">
+                <span class="text-sm sm:text-xl md:text-2xl font-bold heading-font text-blue-700 hidden xs:inline">London Travel Agency</span>
             </a>
             
-            <!-- Desktop Navigation - Full Menu with All Links -->
-            <div class="hidden md:flex items-center gap-5 text-sm font-bold">
-                <a href="index.html" class="hover:text-blue-600 transition-colors pb-1 hover:border-b-2 hover:border-blue-600">Home</a>
-                <a href="non-schengen.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Non-Schengen</a>
-                <a href="portugal.html" class="hover:text-blue-600 transition-colors pb-1 hover:border-b-2 hover:border-blue-600">Portugal</a>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-3 lg:gap-4 text-xs lg:text-sm font-semibold">
+                <a href="index.html" class="hover:text-blue-600 transition-colors pb-0.5 hover:border-b-2 hover:border-blue-600">Home</a>
+                <a href="non-schengen.html" class="text-blue-600 border-b-2 border-blue-600 pb-0.5">Non-Schengen</a>
+                <a href="portugal.html" class="hover:text-blue-600 transition-colors pb-0.5 hover:border-b-2 hover:border-blue-600">Portugal</a>
                 <a href="#jobs" class="hover:text-blue-600 transition-colors">Jobs</a>
                 <a href="#benefits" class="hover:text-blue-600 transition-colors">Benefits</a>
                 <a href="#process" class="hover:text-blue-600 transition-colors">Process</a>
@@ -109,40 +119,66 @@
                 <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a>
             </div>
             
-            <a href="contact.html" 
-               class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-2xl font-semibold flex items-center gap-2 transition-all text-sm">
-                <i class="fas fa-phone"></i>
-                Contact Us
-            </a>
+            <!-- Right Side: Contact Us + Hamburger -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+                <a href="contact.html" 
+                   class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl font-semibold flex items-center gap-1 sm:gap-1.5 transition-all text-xs sm:text-sm">
+                    <i class="fas fa-phone text-xs"></i>
+                    <span class="hidden sm:inline">Contact Us</span>
+                </a>
+                
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-blue-600 focus:outline-none" aria-label="Toggle menu">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="mobile-menu-closed md:hidden bg-white border-t border-gray-200 px-4 sm:px-6">
+            <div class="py-2 sm:py-3 space-y-1.5 sm:space-y-2 text-sm font-semibold">
+                <a href="index.html" class="block hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">Home</a>
+                <a href="non-schengen.html" class="block text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">Non-Schengen</a>
+                <a href="portugal.html" class="block hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">Portugal</a>
+                <a href="#jobs" class="block hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">Jobs</a>
+                <a href="#benefits" class="block hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">Benefits</a>
+                <a href="#process" class="block hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">Process</a>
+                <a href="#why" class="block hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">Why Us</a>
+                <a href="about.html" class="block hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">About</a>
+                <a href="services.html" class="block hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">Services</a>
+                <a href="contact.html" class="block hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">Contact</a>
+            </div>
         </div>
     </nav>
 
     <!-- ====== HERO SECTION ====== -->
     <section class="hero-bg text-white min-h-[70vh] flex items-center">
-        <div class="max-w-7xl mx-auto px-6 py-16">
+        <div class="max-w-7xl mx-auto px-6 py-12 md:py-16">
             <div class="max-w-3xl">
                 <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-3xl text-sm mb-6">
                     <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                     Non-Schengen Europe Opportunity
                 </div>
                 
-                <h1 class="text-5xl md:text-6xl font-bold heading-font leading-tight">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold heading-font leading-tight">
                     Non-Schengen Europe<br>
                     <span class="text-yellow-300">Work Permit Visa</span>
                 </h1>
                 
-                <p class="text-xl text-gray-200 max-w-2xl mt-6">
+                <p class="text-lg sm:text-xl text-gray-200 max-w-2xl mt-6">
                     Start Your Career in Europe with professional assistance for work permit visa applications to selected Non-Schengen European countries.
                 </p>
                 
                 <div class="flex flex-wrap gap-4 mt-8">
                     <a href="#contact" 
-                       class="bg-white text-blue-700 hover:bg-yellow-300 hover:text-blue-800 px-8 py-4 rounded-3xl font-semibold text-lg flex items-center gap-3 transition-all">
+                       class="bg-white text-blue-700 hover:bg-yellow-300 hover:text-blue-800 px-6 sm:px-8 py-3 sm:py-4 rounded-3xl font-semibold text-base sm:text-lg flex items-center gap-3 transition-all">
                         Apply Now
                         <i class="fas fa-arrow-right"></i>
                     </a>
                     <a href="#countries" 
-                       class="border-2 border-white/70 hover:border-white px-8 py-4 rounded-3xl font-semibold text-lg transition-all">
+                       class="border-2 border-white/70 hover:border-white px-6 sm:px-8 py-3 sm:py-4 rounded-3xl font-semibold text-base sm:text-lg transition-all">
                         View Countries
                     </a>
                 </div>
@@ -151,24 +187,24 @@
     </section>
 
     <!-- ====== COUNTRIES SECTION ====== -->
-    <section id="countries" class="py-20 bg-white">
+    <section id="countries" class="py-16 sm:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold heading-font mb-4">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold heading-font mb-4">
                     <i class="fas fa-globe-europe text-blue-600"></i>
                     Countries We Serve
                 </h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
                     We provide professional assistance for work permit visa applications to selected Non-Schengen European countries
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="grid sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
                 <!-- Montenegro -->
                 <div class="country-card">
                     <div class="country-flag">🇲🇪</div>
-                    <h3 class="text-2xl font-bold mt-3">Montenegro</h3>
-                    <p class="text-gray-600 mt-2">Legal employment opportunities with pathway to long-term residence</p>
+                    <h3 class="text-xl sm:text-2xl font-bold mt-3">Montenegro</h3>
+                    <p class="text-gray-600 mt-2 text-sm sm:text-base">Legal employment opportunities with pathway to long-term residence</p>
                     <div class="mt-4 flex items-center justify-center gap-2 text-sm text-green-600">
                         <i class="fas fa-check-circle"></i>
                         <span>Work Permit Available</span>
@@ -178,8 +214,8 @@
                 <!-- Moldova -->
                 <div class="country-card">
                     <div class="country-flag">🇲🇩</div>
-                    <h3 class="text-2xl font-bold mt-3">Moldova</h3>
-                    <p class="text-gray-600 mt-2">Legal employment opportunities with pathway to long-term residence</p>
+                    <h3 class="text-xl sm:text-2xl font-bold mt-3">Moldova</h3>
+                    <p class="text-gray-600 mt-2 text-sm sm:text-base">Legal employment opportunities with pathway to long-term residence</p>
                     <div class="mt-4 flex items-center justify-center gap-2 text-sm text-green-600">
                         <i class="fas fa-check-circle"></i>
                         <span>Work Permit Available</span>
@@ -189,23 +225,23 @@
             
             <!-- Future Countries -->
             <div class="mt-12">
-                <h3 class="text-2xl font-bold heading-font text-center mb-6">Future Countries We Also Process</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-                    <div class="bg-gray-50 rounded-xl p-4 text-center">
-                        <span class="text-3xl">🇷🇸</span>
-                        <p class="font-semibold mt-1">Serbia</p>
+                <h3 class="text-xl sm:text-2xl font-bold heading-font text-center mb-6">Future Countries We Also Process</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
+                    <div class="bg-gray-50 rounded-xl p-3 sm:p-4 text-center">
+                        <span class="text-2xl sm:text-3xl">🇷🇸</span>
+                        <p class="font-semibold mt-1 text-sm sm:text-base">Serbia</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4 text-center">
-                        <span class="text-3xl">🇲🇰</span>
-                        <p class="font-semibold mt-1">North Macedonia</p>
+                    <div class="bg-gray-50 rounded-xl p-3 sm:p-4 text-center">
+                        <span class="text-2xl sm:text-3xl">🇲🇰</span>
+                        <p class="font-semibold mt-1 text-sm sm:text-base">North Macedonia</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4 text-center">
-                        <span class="text-3xl">🇧🇦</span>
-                        <p class="font-semibold mt-1">Bosnia & Herzegovina</p>
+                    <div class="bg-gray-50 rounded-xl p-3 sm:p-4 text-center">
+                        <span class="text-2xl sm:text-3xl">🇧🇦</span>
+                        <p class="font-semibold mt-1 text-sm sm:text-base">Bosnia & Herzegovina</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4 text-center">
-                        <span class="text-3xl">🇨🇾</span>
-                        <p class="font-semibold mt-1">Cyprus</p>
+                    <div class="bg-gray-50 rounded-xl p-3 sm:p-4 text-center">
+                        <span class="text-2xl sm:text-3xl">🇨🇾</span>
+                        <p class="font-semibold mt-1 text-sm sm:text-base">Cyprus</p>
                     </div>
                 </div>
             </div>
@@ -213,85 +249,85 @@
     </section>
 
     <!-- ====== JOB SECTORS ====== -->
-    <section id="jobs" class="py-20 bg-gray-50">
+    <section id="jobs" class="py-16 sm:py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold heading-font mb-4">Available Job Sectors</h2>
-                <p class="text-gray-600">We recruit for a variety of industries across Non-Schengen European countries</p>
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold heading-font mb-4">Available Job Sectors</h2>
+                <p class="text-gray-600 text-sm sm:text-base">We recruit for a variety of industries across Non-Schengen European countries</p>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
-                <div class="bg-white rounded-2xl p-6 text-center shadow-md card-hover">
-                    <i class="fas fa-utensils text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold">Restaurant</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 max-w-4xl mx-auto">
+                <div class="bg-white rounded-2xl p-4 sm:p-6 text-center shadow-md card-hover">
+                    <i class="fas fa-utensils text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-sm sm:text-base">Restaurant</p>
                 </div>
-                <div class="bg-white rounded-2xl p-6 text-center shadow-md card-hover">
-                    <i class="fas fa-hard-hat text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold">Construction</p>
+                <div class="bg-white rounded-2xl p-4 sm:p-6 text-center shadow-md card-hover">
+                    <i class="fas fa-hard-hat text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-sm sm:text-base">Construction</p>
                 </div>
-                <div class="bg-white rounded-2xl p-6 text-center shadow-md card-hover">
-                    <i class="fas fa-seedling text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold">Agriculture</p>
+                <div class="bg-white rounded-2xl p-4 sm:p-6 text-center shadow-md card-hover">
+                    <i class="fas fa-seedling text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-sm sm:text-base">Agriculture</p>
                 </div>
-                <div class="bg-white rounded-2xl p-6 text-center shadow-md card-hover">
-                    <i class="fas fa-shopping-cart text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold">Supermarket</p>
+                <div class="bg-white rounded-2xl p-4 sm:p-6 text-center shadow-md card-hover">
+                    <i class="fas fa-shopping-cart text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-sm sm:text-base">Supermarket</p>
                 </div>
-                <div class="bg-white rounded-2xl p-6 text-center shadow-md card-hover">
-                    <i class="fas fa-store text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold">Retail Stores</p>
+                <div class="bg-white rounded-2xl p-4 sm:p-6 text-center shadow-md card-hover col-span-2 sm:col-span-1">
+                    <i class="fas fa-store text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-sm sm:text-base">Retail Stores</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ====== SALARY & BENEFITS ====== -->
-    <section id="benefits" class="py-20 bg-gradient-to-br from-blue-700 to-indigo-800 text-white">
+    <section id="benefits" class="py-16 sm:py-20 bg-gradient-to-br from-blue-700 to-indigo-800 text-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div>
-                    <h2 class="text-4xl font-bold heading-font mb-6">Salary &amp; Benefits</h2>
+                    <h2 class="text-3xl sm:text-4xl font-bold heading-font mb-6">Salary &amp; Benefits</h2>
                     
-                    <div class="bg-white/10 rounded-3xl p-8 mb-6">
-                        <div class="text-5xl font-bold text-yellow-300">€550</div>
-                        <div class="text-xl">to <span class="font-bold text-yellow-300">€650</span></div>
+                    <div class="bg-white/10 rounded-3xl p-6 sm:p-8 mb-6">
+                        <div class="text-4xl sm:text-5xl font-bold text-yellow-300">€550</div>
+                        <div class="text-lg sm:text-xl">to <span class="font-bold text-yellow-300">€650</span></div>
                         <div class="text-blue-200 mt-1">Monthly Salary</div>
                     </div>
                     
-                    <div class="grid sm:grid-cols-2 gap-4">
-                        <div class="bg-white/10 rounded-2xl p-5">
-                            <i class="fas fa-home text-2xl mb-2"></i>
-                            <div class="font-semibold">Employer-Provided Accommodation</div>
+                    <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                        <div class="bg-white/10 rounded-2xl p-4 sm:p-5">
+                            <i class="fas fa-home text-xl sm:text-2xl mb-2"></i>
+                            <div class="font-semibold text-sm sm:text-base">Employer-Provided Accommodation</div>
                         </div>
-                        <div class="bg-white/10 rounded-2xl p-5">
-                            <i class="fas fa-utensils text-2xl mb-2"></i>
-                            <div class="font-semibold">Food Not Included</div>
+                        <div class="bg-white/10 rounded-2xl p-4 sm:p-5">
+                            <i class="fas fa-utensils text-xl sm:text-2xl mb-2"></i>
+                            <div class="font-semibold text-sm sm:text-base">Food Not Included</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8">
-                    <h3 class="text-2xl font-bold heading-font mb-6">Why Work in Non-Schengen Europe?</h3>
-                    <ul class="space-y-4">
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-6 sm:p-8">
+                    <h3 class="text-xl sm:text-2xl font-bold heading-font mb-6">Why Work in Non-Schengen Europe?</h3>
+                    <ul class="space-y-3 sm:space-y-4">
                         <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-green-400 text-xl mt-1"></i>
-                            <span>Legal employment opportunities</span>
+                            <i class="fas fa-check-circle text-green-400 text-lg sm:text-xl mt-1"></i>
+                            <span class="text-sm sm:text-base">Legal employment opportunities</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-green-400 text-xl mt-1"></i>
-                            <span>Employer-provided accommodation</span>
+                            <i class="fas fa-check-circle text-green-400 text-lg sm:text-xl mt-1"></i>
+                            <span class="text-sm sm:text-base">Employer-provided accommodation</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-green-400 text-xl mt-1"></i>
-                            <span>Stable monthly income</span>
+                            <i class="fas fa-check-circle text-green-400 text-lg sm:text-xl mt-1"></i>
+                            <span class="text-sm sm:text-base">Stable monthly income</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-green-400 text-xl mt-1"></i>
-                            <span>Valuable European work experience</span>
+                            <i class="fas fa-check-circle text-green-400 text-lg sm:text-xl mt-1"></i>
+                            <span class="text-sm sm:text-base">Valuable European work experience</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-green-400 text-xl mt-1"></i>
-                            <span>Potential pathway to long-term residence</span>
+                            <i class="fas fa-check-circle text-green-400 text-lg sm:text-xl mt-1"></i>
+                            <span class="text-sm sm:text-base">Potential pathway to long-term residence</span>
                         </li>
                     </ul>
                 </div>
@@ -300,47 +336,47 @@
     </section>
 
     <!-- ====== REQUIRED DOCUMENTS ====== -->
-    <section class="py-20 bg-white">
+    <section class="py-16 sm:py-20 bg-white">
         <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-4xl font-bold heading-font text-center mb-12">Required Documents</h2>
+            <h2 class="text-3xl sm:text-4xl font-bold heading-font text-center mb-8 sm:mb-12">Required Documents</h2>
             
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-gray-50 rounded-2xl p-6">
+            <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
+                <div class="bg-gray-50 rounded-2xl p-4 sm:p-6">
                     <div class="flex items-center gap-3 mb-2">
-                        <i class="fas fa-passport text-2xl text-blue-600"></i>
-                        <span class="font-semibold">Valid Passport Copy</span>
+                        <i class="fas fa-passport text-xl sm:text-2xl text-blue-600"></i>
+                        <span class="font-semibold text-sm sm:text-base">Valid Passport Copy</span>
                     </div>
                 </div>
-                <div class="bg-gray-50 rounded-2xl p-6">
+                <div class="bg-gray-50 rounded-2xl p-4 sm:p-6">
                     <div class="flex items-center gap-3 mb-2">
-                        <i class="fas fa-image text-2xl text-blue-600"></i>
-                        <span class="font-semibold">Recent Passport Photo (35 × 45 mm)</span>
+                        <i class="fas fa-image text-xl sm:text-2xl text-blue-600"></i>
+                        <span class="font-semibold text-sm sm:text-base">Recent Passport Photo (35 × 45 mm)</span>
                     </div>
                 </div>
-                <div class="bg-gray-50 rounded-2xl p-6">
+                <div class="bg-gray-50 rounded-2xl p-4 sm:p-6">
                     <div class="flex items-center gap-3 mb-2">
-                        <i class="fas fa-file-alt text-2xl text-blue-600"></i>
-                        <span class="font-semibold">Updated CV / Resume</span>
+                        <i class="fas fa-file-alt text-xl sm:text-2xl text-blue-600"></i>
+                        <span class="font-semibold text-sm sm:text-base">Updated CV / Resume</span>
                     </div>
                 </div>
-                <div class="bg-gray-50 rounded-2xl p-6">
+                <div class="bg-gray-50 rounded-2xl p-4 sm:p-6">
                     <div class="flex items-center gap-3 mb-2">
-                        <i class="fas fa-certificate text-2xl text-blue-600"></i>
-                        <span class="font-semibold">Police Clearance Certificate (PCC)</span>
+                        <i class="fas fa-certificate text-xl sm:text-2xl text-blue-600"></i>
+                        <span class="font-semibold text-sm sm:text-base">Police Clearance Certificate (PCC)</span>
                     </div>
                 </div>
             </div>
             
-            <div class="mt-8 bg-blue-50 rounded-2xl p-6 border border-blue-200">
-                <h4 class="font-bold text-blue-800 mb-3">📋 Important Notes by Country</h4>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="bg-white rounded-xl p-4">
-                        <span class="font-bold text-lg">🇲🇩 Moldova</span>
-                        <p class="text-sm text-gray-600 mt-1">Bangladesh Police Clearance Certificate is required before visa processing.</p>
+            <div class="mt-6 sm:mt-8 bg-blue-50 rounded-2xl p-4 sm:p-6 border border-blue-200">
+                <h4 class="font-bold text-blue-800 mb-3 text-sm sm:text-base">📋 Important Notes by Country</h4>
+                <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div class="bg-white rounded-xl p-3 sm:p-4">
+                        <span class="font-bold text-base sm:text-lg">🇲🇩 Moldova</span>
+                        <p class="text-xs sm:text-sm text-gray-600 mt-1">Bangladesh Police Clearance Certificate is required before visa processing.</p>
                     </div>
-                    <div class="bg-white rounded-xl p-4">
-                        <span class="font-bold text-lg">🇲🇪 Montenegro</span>
-                        <p class="text-sm text-gray-600 mt-1">Police Clearance Certificate is generally required after work permit approval.</p>
+                    <div class="bg-white rounded-xl p-3 sm:p-4">
+                        <span class="font-bold text-base sm:text-lg">🇲🇪 Montenegro</span>
+                        <p class="text-xs sm:text-sm text-gray-600 mt-1">Police Clearance Certificate is generally required after work permit approval.</p>
                     </div>
                 </div>
             </div>
@@ -348,30 +384,30 @@
     </section>
 
     <!-- ====== PACKAGE COST ====== -->
-    <section id="process" class="py-20 bg-gray-50">
+    <section id="process" class="py-16 sm:py-20 bg-gray-50">
         <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold heading-font mb-4">Package Cost</h2>
-                <p class="text-3xl font-bold text-green-600">BDT 12,00,000</p>
-                <p class="text-gray-500">(12 Lakh)</p>
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold heading-font mb-4">Package Cost</h2>
+                <p class="text-2xl sm:text-3xl font-bold text-green-600">BDT 12,00,000</p>
+                <p class="text-gray-500 text-sm sm:text-base">(12 Lakh)</p>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
                 <!-- Package Includes -->
-                <div class="bg-white rounded-3xl p-8 shadow-lg border border-green-200 card-hover">
-                    <h3 class="text-2xl font-bold heading-font text-green-700 mb-6">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-green-200 card-hover">
+                    <h3 class="text-xl sm:text-2xl font-bold heading-font text-green-700 mb-4 sm:mb-6">
                         <i class="fas fa-check-circle text-green-500"></i> Package Includes
                     </h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-center gap-3">
+                    <ul class="space-y-3 sm:space-y-4">
+                        <li class="flex items-center gap-3 text-sm sm:text-base">
                             <i class="fas fa-check text-green-500"></i>
                             <span>Work Permit Processing</span>
                         </li>
-                        <li class="flex items-center gap-3">
+                        <li class="flex items-center gap-3 text-sm sm:text-base">
                             <i class="fas fa-check text-green-500"></i>
                             <span>Visa Processing Assistance</span>
                         </li>
-                        <li class="flex items-center gap-3">
+                        <li class="flex items-center gap-3 text-sm sm:text-base">
                             <i class="fas fa-check text-green-500"></i>
                             <span>Air Ticket</span>
                         </li>
@@ -379,83 +415,83 @@
                 </div>
                 
                 <!-- Payment Plan -->
-                <div class="bg-white rounded-3xl p-8 shadow-lg border border-blue-200 card-hover">
-                    <h3 class="text-2xl font-bold heading-font text-blue-700 mb-6">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-blue-200 card-hover">
+                    <h3 class="text-xl sm:text-2xl font-bold heading-font text-blue-700 mb-4 sm:mb-6">
                         <i class="fas fa-credit-card text-blue-500"></i> Payment Plan
                     </h3>
-                    <div class="space-y-4">
-                        <div class="bg-blue-50 rounded-xl p-4">
-                            <div class="font-semibold text-blue-800">Step 1 – File Opening</div>
-                            <div class="text-2xl font-bold text-blue-600">BDT 1,00,000</div>
-                            <div class="text-sm text-gray-500">(1 Lakh)</div>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div class="bg-blue-50 rounded-xl p-3 sm:p-4">
+                            <div class="font-semibold text-blue-800 text-sm sm:text-base">Step 1 – File Opening</div>
+                            <div class="text-xl sm:text-2xl font-bold text-blue-600">BDT 1,00,000</div>
+                            <div class="text-xs sm:text-sm text-gray-500">(1 Lakh)</div>
                         </div>
-                        <div class="bg-indigo-50 rounded-xl p-4">
-                            <div class="font-semibold text-indigo-800">Step 2 – After Work Permit Approval</div>
-                            <div class="text-2xl font-bold text-indigo-600">BDT 2,00,000</div>
-                            <div class="text-sm text-gray-500">(2 Lakh) - Processing takes 1-2 months</div>
+                        <div class="bg-indigo-50 rounded-xl p-3 sm:p-4">
+                            <div class="font-semibold text-indigo-800 text-sm sm:text-base">Step 2 – After Work Permit Approval</div>
+                            <div class="text-xl sm:text-2xl font-bold text-indigo-600">BDT 2,00,000</div>
+                            <div class="text-xs sm:text-sm text-gray-500">(2 Lakh) - Processing takes 1-2 months</div>
                         </div>
-                        <div class="bg-green-50 rounded-xl p-4">
-                            <div class="font-semibold text-green-800">Step 3 – After Visa Approval</div>
-                            <div class="text-2xl font-bold text-green-600">BDT 9,00,000</div>
-                            <div class="text-sm text-gray-500">(9 Lakh) - Before departure</div>
+                        <div class="bg-green-50 rounded-xl p-3 sm:p-4">
+                            <div class="font-semibold text-green-800 text-sm sm:text-base">Step 3 – After Visa Approval</div>
+                            <div class="text-xl sm:text-2xl font-bold text-green-600">BDT 9,00,000</div>
+                            <div class="text-xs sm:text-sm text-gray-500">(9 Lakh) - Before departure</div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="mt-8 bg-yellow-50 border border-yellow-200 rounded-2xl p-6 text-center">
-                <p class="font-semibold text-yellow-800">
+            <div class="mt-6 sm:mt-8 bg-yellow-50 border border-yellow-200 rounded-2xl p-4 sm:p-6 text-center">
+                <p class="font-semibold text-yellow-800 text-sm sm:text-base">
                     <i class="fas fa-clock mr-2"></i> Estimated Processing Time: Approximately 3-4 months
                 </p>
-                <p class="text-sm text-gray-600 mt-1">Processing times may vary depending on the employer, embassy, and government procedures.</p>
+                <p class="text-xs sm:text-sm text-gray-600 mt-1">Processing times may vary depending on the employer, embassy, and government procedures.</p>
             </div>
         </div>
     </section>
 
     <!-- ====== WHY CHOOSE US ====== -->
-    <section id="why" class="py-20 bg-gray-900 text-white">
+    <section id="why" class="py-16 sm:py-20 bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold heading-font">Why Choose London Travel Agency?</h2>
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold heading-font">Why Choose London Travel Agency?</h2>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-white/5 rounded-2xl p-6 text-center card-hover">
-                    <div class="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-clock text-3xl text-blue-400"></i>
+            <div class="grid sm:grid-cols-3 gap-4 sm:gap-6">
+                <div class="bg-white/5 rounded-2xl p-4 sm:p-6 text-center card-hover">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="fas fa-clock text-2xl sm:text-3xl text-blue-400"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-2">20+ Years Experience</h3>
-                    <p class="text-gray-400">Over 20 years of industry experience</p>
+                    <h3 class="font-bold text-lg sm:text-xl mb-2">20+ Years Experience</h3>
+                    <p class="text-gray-400 text-sm sm:text-base">Over 20 years of industry experience</p>
                 </div>
-                <div class="bg-white/5 rounded-2xl p-6 text-center card-hover">
-                    <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-gavel text-3xl text-green-400"></i>
+                <div class="bg-white/5 rounded-2xl p-4 sm:p-6 text-center card-hover">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="fas fa-gavel text-2xl sm:text-3xl text-green-400"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-2">Immigration Lawyer</h3>
-                    <p class="text-gray-400">Our Director is an Immigration Lawyer</p>
+                    <h3 class="font-bold text-lg sm:text-xl mb-2">Immigration Lawyer</h3>
+                    <p class="text-gray-400 text-sm sm:text-base">Our Director is an Immigration Lawyer</p>
                 </div>
-                <div class="bg-white/5 rounded-2xl p-6 text-center card-hover">
-                    <div class="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-hand-holding-heart text-3xl text-purple-400"></i>
+                <div class="bg-white/5 rounded-2xl p-4 sm:p-6 text-center card-hover">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="fas fa-hand-holding-heart text-2xl sm:text-3xl text-purple-400"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-2">End-to-End Support</h3>
-                    <p class="text-gray-400">From application to arrival</p>
+                    <h3 class="font-bold text-lg sm:text-xl mb-2">End-to-End Support</h3>
+                    <p class="text-gray-400 text-sm sm:text-base">From application to arrival</p>
                 </div>
             </div>
             
-            <div class="mt-8 grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <div class="bg-white/5 rounded-2xl p-6 card-hover">
-                    <h4 class="font-bold text-lg mb-3">Additional Services</h4>
-                    <ul class="space-y-2 text-gray-300 text-sm">
+            <div class="mt-6 sm:mt-8 grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
+                <div class="bg-white/5 rounded-2xl p-4 sm:p-6 card-hover">
+                    <h4 class="font-bold text-base sm:text-lg mb-3">Additional Services</h4>
+                    <ul class="space-y-2 text-gray-300 text-xs sm:text-sm">
                         <li>• Settlement guidance</li>
                         <li>• Family reunification applications</li>
                         <li>• Long-term immigration advice</li>
-                        <li class="text-yellow-400 text-xs mt-2">* Additional charges may apply</li>
+                        <li class="text-yellow-400 text-[10px] sm:text-xs mt-2">* Additional charges may apply</li>
                     </ul>
                 </div>
-                <div class="bg-white/5 rounded-2xl p-6 card-hover">
-                    <h4 class="font-bold text-lg mb-3">Eligibility</h4>
-                    <ul class="space-y-2 text-gray-300 text-sm">
+                <div class="bg-white/5 rounded-2xl p-4 sm:p-6 card-hover">
+                    <h4 class="font-bold text-base sm:text-lg mb-3">Eligibility</h4>
+                    <ul class="space-y-2 text-gray-300 text-xs sm:text-sm">
                         <li>✓ Male and female applicants</li>
                         <li>✓ With or without work experience</li>
                         <li>✓ Basic English preferred</li>
@@ -466,72 +502,72 @@
     </section>
 
     <!-- ====== SERVICES ====== -->
-    <section class="py-20 bg-white">
+    <section class="py-16 sm:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-bold heading-font text-center mb-12">Our Services</h2>
+            <h2 class="text-3xl sm:text-4xl font-bold heading-font text-center mb-8 sm:mb-12">Our Services</h2>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-gray-50 rounded-2xl p-6 text-center card-hover">
-                    <i class="fas fa-file-circle-check text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold text-sm">Work Permit Processing</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+                <div class="bg-gray-50 rounded-2xl p-4 sm:p-6 text-center card-hover">
+                    <i class="fas fa-file-circle-check text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-xs sm:text-sm">Work Permit Processing</p>
                 </div>
-                <div class="bg-gray-50 rounded-2xl p-6 text-center card-hover">
-                    <i class="fas fa-passport text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold text-sm">Visa Application Assistance</p>
+                <div class="bg-gray-50 rounded-2xl p-4 sm:p-6 text-center card-hover">
+                    <i class="fas fa-passport text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-xs sm:text-sm">Visa Application Assistance</p>
                 </div>
-                <div class="bg-gray-50 rounded-2xl p-6 text-center card-hover">
-                    <i class="fas fa-plane-departure text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold text-sm">Air Ticket Booking</p>
+                <div class="bg-gray-50 rounded-2xl p-4 sm:p-6 text-center card-hover">
+                    <i class="fas fa-plane-departure text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-xs sm:text-sm">Air Ticket Booking</p>
                 </div>
-                <div class="bg-gray-50 rounded-2xl p-6 text-center card-hover">
-                    <i class="fas fa-graduation-cap text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold text-sm">Student Visas</p>
+                <div class="bg-gray-50 rounded-2xl p-4 sm:p-6 text-center card-hover">
+                    <i class="fas fa-graduation-cap text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-xs sm:text-sm">Student Visas</p>
                 </div>
-                <div class="bg-gray-50 rounded-2xl p-6 text-center card-hover">
-                    <i class="fas fa-umrah text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold text-sm">Umrah Packages</p>
+                <div class="bg-gray-50 rounded-2xl p-4 sm:p-6 text-center card-hover">
+                    <i class="fas fa-umrah text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-xs sm:text-sm">Umrah Packages</p>
                 </div>
-                <div class="bg-gray-50 rounded-2xl p-6 text-center card-hover">
-                    <i class="fas fa-gavel text-3xl text-blue-600 mb-3"></i>
-                    <p class="font-semibold text-sm">Immigration Consultancy</p>
+                <div class="bg-gray-50 rounded-2xl p-4 sm:p-6 text-center card-hover">
+                    <i class="fas fa-gavel text-2xl sm:text-3xl text-blue-600 mb-2 sm:mb-3"></i>
+                    <p class="font-semibold text-xs sm:text-sm">Immigration Consultancy</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ====== CONTACT / CTA ====== -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-blue-700 to-indigo-900 text-white">
+    <section id="contact" class="py-16 sm:py-20 bg-gradient-to-br from-blue-700 to-indigo-900 text-white">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold heading-font mb-6">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold heading-font mb-6">
                 Apply Today
             </h2>
-            <p class="text-xl text-blue-100 mb-8">
+            <p class="text-lg sm:text-xl text-blue-100 mb-6 sm:mb-8">
                 Limited vacancies are available. Contact us today to check your eligibility and begin your Non-Schengen Europe Work Permit Visa application.
             </p>
             
-            <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-                <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+            <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 sm:p-8 border border-white/20">
+                <h3 class="text-xl sm:text-2xl font-bold mb-6">Contact Information</h3>
                 
-                <div class="grid md:grid-cols-2 gap-6 text-left">
+                <div class="grid sm:grid-cols-2 gap-6 text-left">
                     <div>
                         <h4 class="font-semibold text-yellow-300 mb-3">📍 Office Branches</h4>
                         <div class="space-y-3">
                             <div>
-                                <p class="font-semibold">London, United Kingdom</p>
-                                <p class="text-sm text-blue-100">102-105 Whitechapel High Street, Office No. 201, E1 7RA</p>
+                                <p class="font-semibold text-sm sm:text-base"><span class="text-2xl mr-2">🇬🇧</span> London, United Kingdom</p>
+                                <p class="text-xs sm:text-sm text-blue-100">102-105 Whitechapel High Street, Office No. 201, E1 7RA</p>
                             </div>
                             <div>
-                                <p class="font-semibold">Dhaka, Bangladesh</p>
-                                <p class="text-sm text-blue-100">Lift 6, Office No. 105, Mukto Bangla Shopping Complex, Mirpur 1, Dhaka 1216</p>
+                                <p class="font-semibold text-sm sm:text-base"><span class="text-2xl mr-2">🇧🇩</span> Dhaka, Bangladesh</p>
+                                <p class="text-xs sm:text-sm text-blue-100">Lift 6, Office No. 105, Mukto Bangla Shopping Complex, Mirpur 1, Dhaka 1216</p>
                             </div>
                         </div>
                     </div>
                     <div>
                         <h4 class="font-semibold text-yellow-300 mb-3">📞 Contact</h4>
-                        <div class="space-y-2">
+                        <div class="space-y-2 text-sm sm:text-base">
                             <p><i class="fab fa-whatsapp text-green-400 mr-2"></i> +1 (347) 706-7980</p>
                             <p><i class="fas fa-phone text-blue-400 mr-2"></i> +44 7448 270044</p>
-                            <p class="text-sm text-green-300 mt-2">
+                            <p class="text-xs sm:text-sm text-green-300 mt-2">
                                 <span class="w-2 h-2 bg-green-400 rounded-full inline-block mr-2"></span>
                                 24-Hour Service
                             </p>
@@ -539,11 +575,11 @@
                     </div>
                 </div>
                 
-                <div class="mt-8">
+                <div class="mt-6 sm:mt-8">
                     <a href="https://wa.me/13477067980" 
                        target="_blank"
-                       class="inline-block bg-white text-blue-700 hover:bg-yellow-300 hover:text-blue-900 px-10 py-4 rounded-3xl font-bold text-lg transition-all">
-                        <i class="fab fa-whatsapp text-green-500 text-xl mr-3"></i>
+                       class="inline-block bg-white text-blue-700 hover:bg-yellow-300 hover:text-blue-900 px-6 sm:px-10 py-3 sm:py-4 rounded-3xl font-bold text-base sm:text-lg transition-all">
+                        <i class="fab fa-whatsapp text-green-500 text-lg sm:text-xl mr-3"></i>
                         Apply on WhatsApp Now
                     </a>
                 </div>
@@ -552,21 +588,22 @@
     </section>
 
     <!-- ====== FOOTER ====== -->
-    <footer class="bg-gray-900 text-gray-400 py-12">
+    <footer class="bg-gray-900 text-gray-400 py-8 sm:py-12">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="flex justify-center items-center gap-3 mb-6">
-                <div class="flag-bg w-8 h-8 rounded-xl flex items-center justify-center text-white">🇧🇬</div>
-                <span class="text-white font-semibold">London Travel Agency &amp; Consultancy</span>
+            <div class="flex justify-center items-center gap-3 mb-4 sm:mb-6">
+                <span class="text-2xl">🇬🇧</span>
+                <span class="text-white font-semibold text-sm sm:text-base">London Travel Agency &amp; Consultancy</span>
+                <span class="text-2xl">🇧🇩</span>
             </div>
             
-            <div class="text-sm text-gray-500 mb-4 space-y-1">
-                <p><span class="text-gray-400 font-medium">UK Office:</span> 102-105 Whitechapel High Street, Office No. 201, E1 7RA, London, UK</p>
-                <p><span class="text-gray-400 font-medium">Bangladesh Office:</span> Lift 6, Office No. 105, Mukto Bangla Shopping Complex, Mirpur 1, Dhaka 1216</p>
-                <p class="mt-2">WhatsApp: +1 (347) 706-7980 | UK Mobile: +44 7448 270044</p>
+            <div class="text-xs sm:text-sm text-gray-500 mb-4 space-y-1">
+                <p><span class="text-gray-400 font-medium">🇬🇧 UK Office:</span> 102-105 Whitechapel High Street, Office No. 201, E1 7RA, London, UK</p>
+                <p><span class="text-gray-400 font-medium">🇧🇩 Bangladesh Office:</span> Lift 6, Office No. 105, Mukto Bangla Shopping Complex, Mirpur 1, Dhaka 1216</p>
+                <p class="mt-2 text-xs sm:text-sm">WhatsApp: +1 (347) 706-7980 | UK Mobile: +44 7448 270044</p>
             </div>
             
-            <p class="text-sm">Visa approval is solely at the discretion of the immigration authorities of the destination country.<br>All documents must be genuine.</p>
-            <div class="mt-8 text-xs">© 2026 London Travel Agency. All Rights Reserved.</div>
+            <p class="text-[10px] sm:text-sm">Visa approval is solely at the discretion of the immigration authorities of the destination country.<br>All documents must be genuine.</p>
+            <div class="mt-4 sm:mt-8 text-[10px] sm:text-xs">© 2026 London Travel Agency. All Rights Reserved.</div>
         </div>
     </footer>
 
@@ -576,6 +613,38 @@
        title="Chat with us on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mobile Menu Toggle
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', function() {
+                    const isOpen = mobileMenu.classList.contains('mobile-menu-open');
+                    mobileMenu.classList.toggle('mobile-menu-open');
+                    mobileMenu.classList.toggle('mobile-menu-closed');
+                    
+                    const icon = menuButton.querySelector('svg');
+                    if (isOpen) {
+                        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                    } else {
+                        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+                    }
+                });
+                
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('mobile-menu-open');
+                        mobileMenu.classList.add('mobile-menu-closed');
+                        const icon = menuButton.querySelector('svg');
+                        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                    });
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
